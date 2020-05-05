@@ -104,7 +104,7 @@ iConsoleLogLevel;
 + (void)crash:(NSString *)format, ... NS_FORMAT_FUNCTION(1,2);
 
 + (void)log:(NSString *)format args:(va_list)argList;
-+ (void)testLog:(NSString *)format;
++ (void)logTest:(NSString *)format;
 + (void)info:(NSString *)format args:(va_list)argList;
 + (void)warn:(NSString *)format args:(va_list)argList;
 + (void)error:(NSString *)format args:(va_list)argList;
