@@ -654,6 +654,29 @@ static void exceptionHandler(NSException *exception)
     }
 }
 
++ (void)testLog:(NSString *)format {
+  
+  if ([self sharedConsole].logLevel > iConsoleLogLevelNone)
+  {
+      NSString *message = [(NSString *)[NSString alloc] initWithFormat:format];
+      
+      NSLog(@"%@", message);
+      
+      if ([self sharedConsole].enabled)
+      {
+          if ([NSThread currentThread] == [NSThread mainThread])
+          {
+              [[self sharedConsole] logOnMainThread:message];
+          }
+          else
+          {
+              [[self sharedConsole] performSelectorOnMainThread:@selector(logOnMainThread:)
+                                                     withObject:message waitUntilDone:NO];
+          }
+      }
+  }
+}
+
 + (void)info:(NSString *)format args:(va_list)argList
 {
     if ([self sharedConsole].logLevel >= iConsoleLogLevelInfo)
